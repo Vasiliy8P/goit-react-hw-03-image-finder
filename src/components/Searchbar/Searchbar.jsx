@@ -1,5 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import { FaSearch } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 import './Searchbar.css';
 
 const Searchbar = ({onSubmit}) => {
@@ -30,6 +31,10 @@ const Searchbar = ({onSubmit}) => {
             </Formik>            
         </header>
     )
+}
+
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 }
 
 export default Searchbar;
