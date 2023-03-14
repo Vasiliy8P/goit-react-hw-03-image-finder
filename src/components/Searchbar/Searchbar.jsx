@@ -15,7 +15,7 @@ const Searchbar = ({onSubmit}) => {
             >
                 <Form className="SearchForm">
                     <button type="submit" className="SearchForm-button">
-                        <FaSearch style={{width: "30", height: "30"}} />
+                        <FaSearch style={{width: "20", height: "20"}} />
                     </button>
 
                     <Field

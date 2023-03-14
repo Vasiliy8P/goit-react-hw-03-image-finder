@@ -11,20 +11,20 @@ class ImageGalleryItem extends Component {
         this.setState({isOpenModal: true})
     }
 
-    closeModal = (event) => {
-        // if (event.target !== event.carrentTarget) {
-            this.setState({isOpenModal: false})
-        // }        
+    closeModal = () => {
+        this.setState({isOpenModal: false})
     }
     
     render() {
         const { id, webformatURL, largeImageURL, tags } = this.props.image;
         return (
             <li key={id} className="ImageGalleryItem">
-                <a onClick={this.openModal}>
-                    <img src={webformatURL} alt={tags} className="ImageGalleryItem-image" />
-                </a>
-                {this.state.isOpenModal && <Modal image={this.props.image} onClose={this.closeModal} />}                
+                <img src={webformatURL} alt={tags} onClick={this.openModal} className="ImageGalleryItem-image" />
+                {this.state.isOpenModal && (
+                    <Modal onClose={this.closeModal}>
+                        <img src={largeImageURL} alt={tags} className="LargeImage" />
+                    </Modal>
+                )}                
             </li>
         )
     }

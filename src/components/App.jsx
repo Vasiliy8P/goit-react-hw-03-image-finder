@@ -12,21 +12,25 @@ export default class App extends Component {
     searchQuery: '',
     page: 1,
     status: 'idle',
+    totalHits: null,
   }
 
   componentDidUpdate = async (prevProps, prevState) => {
     const {searchQuery, page} = this.state;
 
     if (prevState.searchQuery !== searchQuery || prevState.page !== page) {  
-      this.setState({status: 'panding'})
+      this.setState({ status: 'panding' });
+      
       try {
         const images = await GetImages(searchQuery, page);
+
         this.setState(state => ({
           images: [...state.images, ...images.hits],
-          status: 'resolved'
+          status: 'resolved',
+          totalHits: images.totalHits,
         }));
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }    
   }
@@ -34,7 +38,8 @@ export default class App extends Component {
   handleSubmitForm = value => {
     this.setState({
       images: [],
-      searchQuery: value
+      searchQuery: value,
+      page: 1,
     });
   }
 
@@ -45,17 +50,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { images, status } = this.state;
+    const { images, status, totalHits } = this.state;
 
     return (
       <div className='App'>
         <Searchbar onSubmit={this.handleSubmitForm} />
         <ImageGallery images={images} />
-        {status === 'panding' && <Loader />}       
-        {/* {status === 'resolved' && <Button onClick={this.handleClickButton} />} */}
-        
-        {images.length > 0 && <Button onClick={this.handleClickButton} />}         
-        {/* <Modal /> */}
+        {status === 'panding' && <Loader />}        
+        {(images.length > 0) && (images.length < totalHits) && <Button onClick={this.handleClickButton} />} 
       </div>
     )
   }
