@@ -17,9 +17,9 @@ class ImageGalleryItem extends Component {
     }
     
     render() {
-        const { id, webformatURL, largeImageURL, tags } = this.props.image;
+        const { webformatURL, largeImageURL, tags } = this.props.image;
         return (
-            <li key={id} className="ImageGalleryItem">
+            <li className="ImageGalleryItem">
                 <img src={webformatURL} alt={tags} onClick={this.openModal} className="ImageGalleryItem-image" />
                 {this.state.isOpenModal && (
                     <Modal onClose={this.closeModal}>
@@ -33,7 +33,6 @@ class ImageGalleryItem extends Component {
 
 ImageGalleryItem.propTypes = {
     image: PropTypes.shape({
-        id: PropTypes.number.isRequired,
         webformatURL: PropTypes.string.isRequired,
         largeImageURL: PropTypes.string.isRequired,
         tags: PropTypes.string.isRequired,

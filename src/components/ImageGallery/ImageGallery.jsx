@@ -6,7 +6,9 @@ const ImageGallery = ({ images }) => {
     return (
         <ul className="ImageGallery">
             {images.map(image => (
-                <ImageGalleryItem image={image} />
+                <div key={image.id} >
+                    <ImageGalleryItem image={image} />
+                </div>                
             ))}
         </ul>
     )
@@ -14,6 +16,9 @@ const ImageGallery = ({ images }) => {
 
 ImageGallery.propTypes = {
     images: PropTypes.array.isRequired,
+    image: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+    }),
 }
 
 export default ImageGallery;
