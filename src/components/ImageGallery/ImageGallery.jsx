@@ -1,12 +1,11 @@
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import './ImageGallery.css';
 
-const ImageGallery = ({ images: {hits} }) => {
-    console.log("ImageGallery  hits:", hits)
+const ImageGallery = ({ images }) => {
     return (
         <ul className="ImageGallery">
-            {hits.map(hit => (
-                <ImageGalleryItem images={hit} />
+            {images.map(image => (
+                <ImageGalleryItem image={image} />
             ))}
         </ul>
     )
